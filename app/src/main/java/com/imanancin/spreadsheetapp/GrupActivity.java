@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class GrupActivity extends AppCompatActivity {
 
@@ -36,12 +37,16 @@ public class GrupActivity extends AppCompatActivity {
     public void toBarcode(View view) {
         int gr = grup.getCheckedRadioButtonId();
         int sh = shift.getCheckedRadioButtonId();
-        RadioButton g = (RadioButton) findViewById(gr);
-        RadioButton s = (RadioButton) findViewById(sh);
 
-        editor.putString("grup", g.getText().toString());
-        editor.putString("shift", s.getText().toString());
-        editor.apply();
-        startActivity(new Intent(this, PostActivity.class));
+        if (gr == -1 || sh == -1) {
+            Toast.makeText(this, "Isi data dulu", Toast.LENGTH_SHORT).show();
+        } else {
+            RadioButton g = (RadioButton) findViewById(gr);
+            RadioButton s = (RadioButton) findViewById(sh);
+            editor.putString("grup", g.getText().toString());
+            editor.putString("shift", s.getText().toString());
+            editor.apply();
+            startActivity(new Intent(this, PostActivity.class));
+        }
     }
 }

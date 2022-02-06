@@ -1,5 +1,6 @@
 package com.imanancin.spreadsheetapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +25,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +38,8 @@ public class PostActivity extends AppCompatActivity {
     TextView grup, shift, barcode;
     String g,s,b;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,19 +58,30 @@ public class PostActivity extends AppCompatActivity {
         grup.setText(g);
         shift.setText(s);
         barcode.setText(b);
+
+
     }
 
 
 
 
     public  void postData(View v) {
-        post();
+        if(grup.getText() == null || shift.getText() == null || barcode.getText() == null) {
+            notifyUser("Lengkapi data");
+        } else {
+            post();
+        }
+
     }
 
     private void post(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String formattedDate = simpleDateFormat.format(calendar.getTime());
+
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="https://script.google.com/macros/s/AKfycbxRQtEz3RO0MVEpiFGFGuCzPpDNWv5SORsdIXzWbOA0Wtt6RB9DkjUSRXdzEKggV3NlHw/exec";
+        String url ="https://script.google.com/macros/s/AKfycby903haTP4Nt_NZbUEKdAAPINoZkVeNj3KkQTLAQg38b_mPny9OYttjT-7ee2awAww8/exec";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -86,8 +103,10 @@ public class PostActivity extends AppCompatActivity {
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<>();
                 params.put("id", "1VZGdFh3eCUC7Vz8LLNh9UYtmo9Qjbu41UMCnYNI8xiQ");
-                params.put("country", "Tes");
-                params.put("name","name");
+                params.put("name", barcode.getText().toString());
+                params.put("grup", grup.getText().toString());
+                params.put("shift", shift.getText().toString());
+                params.put("country",formattedDate);
                 return params;
             }
 
@@ -124,9 +143,7 @@ public class PostActivity extends AppCompatActivity {
                 // get String data from Intent
                 String returnString = data.getStringExtra("barcode");
 
-                // set text view with string
-                TextView textView = (TextView) findViewById(R.id.barcode);
-                textView.setText(returnString);
+                barcode.setText(returnString);
             }
         }
     }
@@ -137,19 +154,20 @@ public class PostActivity extends AppCompatActivity {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Sukses...")
+            builder.setTitle("Success..");
+            builder.setMessage("Data has been submitted")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // FIRE ZE MISSILES!
                             dialog.dismiss();
                         }
-                    })
-                    .setNegativeButton("Siap", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
-                            dialog.dismiss();
-                        }
                     });
+//                    .setNegativeButton("Siap", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            // User cancelled the dialog
+//                            dialog.dismiss();
+//                        }
+//                    });
             // Create the AlertDialog object and return it
             return builder.create();
         }
