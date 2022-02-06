@@ -6,6 +6,8 @@
         <entry key="app/src/main/res/layout/activity_barcode.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/activity_grup.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/activity_post.xml" value="0.21568627450980393" />
+        <entry key="app/src/main/res/layout/dropdown_menu_popup_item.xml" value="0.21354166666666666" />
       </map>
     </option>
   </component>

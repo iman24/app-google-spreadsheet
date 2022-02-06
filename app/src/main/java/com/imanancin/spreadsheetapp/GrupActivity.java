@@ -7,46 +7,65 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class GrupActivity extends AppCompatActivity {
 
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
-    RadioGroup grup, shift;
+    AutoCompleteTextView grup, shift;
+    AutoCompleteTextView editTextFilledExposedDropdown, editTextFilledExposedDropdown2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grup);
 
-        grup = (RadioGroup) findViewById(R.id.grup);
-        shift = (RadioGroup) findViewById(R.id.shift);
+        grup = (AutoCompleteTextView) findViewById(R.id.grupp);
+        shift = (AutoCompleteTextView) findViewById(R.id.shiftt);
 
-        sharedPref = getSharedPreferences("mantap", Context.MODE_PRIVATE);
-        editor = sharedPref.edit();
-        editor.putString("grup", "");
-        editor.putString("shift", "");
-        editor.putString("barcode", "belum scan");
+        String[] type1 = new String[] {"Grup 1","Grup 2","Grup 3","Grup SPV"};
+        String[] type2 = new String[] {"Shift 1","Shift 2","Shift 3","Shift 4"};
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        type1);
+
+        editTextFilledExposedDropdown = findViewById(R.id.grupp);
+        editTextFilledExposedDropdown.setAdapter(adapter);
+
+        ArrayAdapter<String> adapter2 =
+                new ArrayAdapter<>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        type2);
+
+        editTextFilledExposedDropdown2 = findViewById(R.id.shiftt);
+        editTextFilledExposedDropdown2.setAdapter(adapter2);
+
 
 
     }
 
     public void toBarcode(View view) {
-        int gr = grup.getCheckedRadioButtonId();
-        int sh = shift.getCheckedRadioButtonId();
 
-        if (gr == -1 || sh == -1) {
-            Toast.makeText(this, "Isi data dulu", Toast.LENGTH_SHORT).show();
+        if (editTextFilledExposedDropdown.getText().toString().equals("") || editTextFilledExposedDropdown2.getText().toString().equals("")) {
+            Snackbar.make(view, "Data Belum dipilih", Snackbar.LENGTH_SHORT).show();
         } else {
-            RadioButton g = (RadioButton) findViewById(gr);
-            RadioButton s = (RadioButton) findViewById(sh);
-            editor.putString("grup", g.getText().toString());
-            editor.putString("shift", s.getText().toString());
-            editor.apply();
-            startActivity(new Intent(this, PostActivity.class));
+//            Snackbar.make(view, editTextFilledExposedDropdown.getText(), Snackbar.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, PostActivity.class);
+            intent.putExtra("grup",editTextFilledExposedDropdown.getText().toString());
+            intent.putExtra("shift",editTextFilledExposedDropdown2.getText().toString());
+            startActivity(intent);
         }
+
     }
 }

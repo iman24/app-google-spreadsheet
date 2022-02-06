@@ -15,39 +15,19 @@
         android:layout_height="wrap_content"
         android:text="Grup"/>
 
-    <RadioGroup
-        android:id="@+id/grup"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="160dp">
-        <RadioButton
-            android:id="@+id/grup_a"
-            android:text="Grup A"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:id="@+id/grup_b"
-            android:text="Grup B"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:id="@+id/grup_c"
-            android:text="Grup C"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:id="@+id/grup_d"
-            android:text="Grup D"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:id="@+id/grup_spv"
-            android:text="Grup SPV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </RadioGroup>
+   <com.google.android.material.textfield.TextInputLayout
+       android:layout_marginHorizontal="25dp"
+       android:layout_marginVertical="10dp"
+       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <AutoCompleteTextView
+           android:padding="20dp"
+           android:id="@+id/grupp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:inputType="none"/>
+   </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:textSize="17dp"
@@ -57,27 +37,19 @@
         android:layout_height="wrap_content"
         android:text="Shift"/>
 
-    <RadioGroup
-        android:id="@+id/shift"
-        android:layout_marginHorizontal="20dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/shift_1"
-            android:text="Shift 1"
+        <AutoCompleteTextView
+            android:padding="20dp"
+            android:id="@+id/shiftt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:id="@+id/shift_2"
-            android:text="Shift 2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:id="@+id/shift_3"
-            android:text="Shift 3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </RadioGroup>
+            android:layout_height="wrap_content"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:onClick="toBarcode"

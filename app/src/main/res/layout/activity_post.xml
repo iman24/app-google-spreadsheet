@@ -6,76 +6,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:padding="10dp"
     tools:context=".PostActivity">
 
 
-    <TextView
-        android:textSize="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:text="Hasil"/>
+   <androidx.cardview.widget.CardView
+       app:cardElevation="5dp"
+       android:layout_margin="5dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       >
+      <LinearLayout
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="350dp">
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
-            <TextView
-                android:layout_marginRight="50dp"
-                android:textSize="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:text="Grup"/>
-            <TextView
-                android:textSize="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:id="@+id/grup"
-                android:text="Hasil"/>
-        </TableRow>
+          android:layout_marginVertical="10dp"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+          <TextView
+              android:textColor="@color/purple_500"
+              android:layout_marginHorizontal="20dp"
+              android:textSize="30dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:weightSum="1"
+              android:text="Hasil"/>
+          
+          <LinearLayout
+              android:layout_marginVertical="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
-        <TableRow android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
-            <TextView
-                android:textSize="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:text="Shift"/>
-            <TextView
-                android:textSize="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:id="@+id/shift"
-                android:text="Hasil"/>
-        </TableRow>
+              <ImageView
+                  android:layout_width="70dp"
+                  android:layout_height="wrap_content"
+                  android:src="@drawable/ic_baseline_people_alt_24"/>
 
-        <TableRow android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
-            <TextView
-                android:textSize="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:text="Barcode"/>
-            <TextView
-                android:textSize="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:id="@+id/barcode"
-                android:text="Hasil"/>
-        </TableRow>
+              <TextView
+                  android:textSize="17dp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/grup"
+                  android:text="No Data"
+                  />
 
-    </TableLayout>
+          </LinearLayout>
+
+          <LinearLayout
+              android:layout_marginVertical="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+              <ImageView
+
+                  android:layout_width="70dp"
+                  android:layout_height="wrap_content"
+                  android:src="@drawable/ic_baseline_timelapse_24"/>
+
+              <TextView
+                  android:textSize="17dp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/shift"
+                  android:text="No Data"
+                  />
+
+          </LinearLayout>
+
+          <LinearLayout
+              android:layout_marginVertical="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+              <ImageView
+                  android:layout_width="70dp"
+                  android:layout_height="wrap_content"
+                  android:src="@drawable/ic_baseline_qr_code_24" />
+
+              <TextView
+                  android:textSize="17dp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/barcode"
+                  android:text="No Data"
+                  />
+
+          </LinearLayout>
+
+
+      </LinearLayout>
+   </androidx.cardview.widget.CardView>
 
     <Button
+        android:backgroundTint="#2196F3"
         android:weightSum="2"
         android:layout_marginVertical="5dp"
         android:onClick="scan"
@@ -89,6 +113,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:backgroundTint="#4CAF50"
         android:weightSum="2"
         android:layout_marginVertical="5dp"
         android:onClick="postData"

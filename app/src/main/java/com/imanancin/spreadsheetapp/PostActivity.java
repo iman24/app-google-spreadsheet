@@ -33,13 +33,12 @@ import java.util.Map;
 public class PostActivity extends AppCompatActivity {
 
     private static final int SECOND_ACTIVITY_REQUEST_CODE = 0;
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
+
     TextView grup, shift, barcode;
     String g,s,b;
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,16 +48,12 @@ public class PostActivity extends AppCompatActivity {
         shift = (TextView) findViewById(R.id.shift);
         barcode = (TextView) findViewById(R.id.barcode);
 
-
-        sharedPref = getSharedPreferences("mantap", Context.MODE_PRIVATE);
-        g = sharedPref.getString("grup","kosong");
-        s = sharedPref.getString("shift","kosong");
-        b = sharedPref.getString("barcode","kosong");
+        Intent intent = getIntent();
+        g = intent.getStringExtra("grup");
+        s = intent.getStringExtra("shift");
 
         grup.setText(g);
         shift.setText(s);
-        barcode.setText(b);
-
 
     }
 
@@ -66,8 +61,8 @@ public class PostActivity extends AppCompatActivity {
 
 
     public  void postData(View v) {
-        if(grup.getText() == null || shift.getText() == null || barcode.getText() == null) {
-            notifyUser("Lengkapi data");
+        if(grup.getText().toString().equals("No Data") || shift.getText().toString().equals("No Data") || barcode.getText().toString().equals("No Data")) {
+            notifyUser("Data not complete");
         } else {
             post();
         }
